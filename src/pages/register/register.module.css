@@ -1,0 +1,60 @@
+.signupContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.formCardContainer {
+    background-color: #517C8C;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 20rem;
+    color: white;
+}
+
+.formCardHeader {
+    padding-bottom: 1.5rem;
+}
+
+.cardHeaderTitle {
+    font-size: 1.5rem;
+}
+
+.formCardBody {
+    padding-bottom: 1.5rem;
+}
+
+.cardLabel {
+    display: block;
+    padding-bottom: .5rem;
+}
+
+.cardInput {
+    width: 100%;
+    padding: .2rem .5rem;
+    border-radius: .3rem;
+    outline: none;
+    border: none;
+
+}
+
+.cardInputGroup {
+ padding-bottom: 1rem;
+}
+
+.btnHignlight {
+    width: 100%;
+    padding: .5rem 0;
+    border-radius: .5rem;
+    border: none;
+    background-color: #FFD067;
+    color: #073A4D;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btnHignlight:hover {
+    background-color: #ddb45a;
+}
