@@ -1,0 +1,9 @@
+.signInContainer {
+    min-height: calc(100vh - 112px);
+}
+
+.formCard {
+    background-color: #4e545a;
+    width: 30rem;
+    padding: 3rem;
+}
