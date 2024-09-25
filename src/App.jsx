@@ -12,9 +12,9 @@ function App() {
     <div className='app-container'>
       <Navbar />
       <div className='container'>
-        <SignIn />
+        {/* <SignIn /> */}
         {/* <SignUp /> */}
-        {/* <Boxs /> */}
+        <Boxs />
       </div>
     </div>
   )

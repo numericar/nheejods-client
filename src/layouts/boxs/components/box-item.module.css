@@ -1,0 +1,45 @@
+.boxItemContainer {
+    background-color: #4e545a;
+    width: 18rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+}
+
+.circleIncome {
+    width: 20px;
+    height: 20px;
+    background-color: #06D7A0;
+    border-radius: 50%;
+}
+
+.circleExpense {
+    width: 20px;
+    height: 20px;
+    background-color: #F04772;
+    border-radius: 50%;
+}
+
+.barContainer {
+    width: 100%;
+    height: .3rem;
+}
+
+.barItemGreen {
+    background-color: #06D7A0;
+    width: 25%;
+}
+
+.barItemYellow {
+    background-color: #FFD067;
+    width: 25%;
+}
+
+.barItemRed {
+    background-color: #F04772;
+    width: 25%;
+}
+
+.barItemDark {
+    background-color: #212529;
+    width: 25%;
+}
