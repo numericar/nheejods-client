@@ -1,5 +1,5 @@
 import './boxs.module.css';
-import BoxItem from './components/box-item';
+import ShortBoxItem from './components/short-box-item';
 
 export default function Boxs() {
     const years = [2024, 2025, 2026, 2027];
@@ -83,12 +83,12 @@ export default function Boxs() {
 
             {/* item section */}
             <div className='d-flex gap-3 flex-wrap'>
-                <BoxItem />
-                <BoxItem />
-                <BoxItem />
-                <BoxItem />
-                <BoxItem />
-                <BoxItem />
+                <ShortBoxItem />
+                <ShortBoxItem />
+                <ShortBoxItem />
+                <ShortBoxItem />
+                <ShortBoxItem />
+                <ShortBoxItem />
             </div>
         </div>
     )

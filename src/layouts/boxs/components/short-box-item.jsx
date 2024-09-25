@@ -1,6 +1,6 @@
-import styles from './box-item.module.css';
+import styles from './short-box-item.module.css';
 
-export default function BoxItem() {
+export default function ShortBoxItem() {
     return (
         <div className={styles.boxItemContainer}>
             <div className='d-flex justify-content-between'>
