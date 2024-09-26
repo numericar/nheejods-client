@@ -1,0 +1,17 @@
+.totalBox {
+    background-color: #4e545a;
+    padding: .5rem 1.5rem;
+    border-radius: 1rem;
+}
+
+.tableInput {
+    background-color: #4e545a;
+    transition: .3s;
+    border: none;
+    color: white;
+}
+
+.tableInput:focus {
+    background-color: #62686d;
+    color: white;
+}
