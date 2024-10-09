@@ -20,6 +20,26 @@ async function login(email, password) {
     }
 }
 
+async function register(email, password) {
+    try {
+        const response = await fetch(`${apiCondig.basePath}${apiCondig.routes.auths}register`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        });
+
+        return await response.json();
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 export default {
-    login
+    login,
+    register
 }
