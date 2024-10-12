@@ -2,7 +2,7 @@ import apiCondig from '../configs/apiConfig';
 
 async function login(email, password) {
     try {
-        const response = await fetch(`${apiCondig.basePath}${apiCondig.routes.auths}login`, {
+        const response = await fetch(`${apiCondig.basePath}${apiCondig.routes.auths}/login`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -22,7 +22,7 @@ async function login(email, password) {
 
 async function register(email, password) {
     try {
-        const response = await fetch(`${apiCondig.basePath}${apiCondig.routes.auths}register`, {
+        const response = await fetch(`${apiCondig.basePath}${apiCondig.routes.auths}/register`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'

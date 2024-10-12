@@ -3,6 +3,12 @@
     width: 18rem;
     padding: 1.5rem;
     border-radius: 1rem;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.boxItemContainer:hover {
+    background-color: #5b5f63;
 }
 
 .circleIncome {

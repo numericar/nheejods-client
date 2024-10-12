@@ -1,6 +1,9 @@
 import styles from './short-box-item.module.css';
+import { useNavigate } from "react-router-dom";
 
 export default function ShortBoxItem({ box }) {
+    const navigate = useNavigate();
+    console.log(box)
 
     function bar() {
         const startLow = (box.expensePercent >= 0) ? <div className={styles.barItemGreen}></div> : <div className={styles.barItemDark}></div>;
@@ -18,8 +21,12 @@ export default function ShortBoxItem({ box }) {
         )
     }
 
+    function navigateToBoxItem(boxId) {
+        navigate(`/item/${boxId}`);
+    }
+
     return (
-        <div className={styles.boxItemContainer}>
+        <div className={styles.boxItemContainer} onClick={() => navigateToBoxItem(box.id)}>
             <div className='d-flex justify-content-between'>
                 <div>
                     <p>{box.title}</p>
