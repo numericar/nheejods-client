@@ -18,6 +18,11 @@ export default function BoxItem() {
         amount: ''
     });
 
+    const [expenseInput, setExpenseInput] = useState({
+        title: '',
+        amount: ''
+    });
+
     const [updateState, setUpdateState] = useState({
         appends: [],
         updateds: [],
@@ -31,6 +36,10 @@ export default function BoxItem() {
     useEffect(() => {
         incomeSummaryHandler();
     }, [incomeItems]);
+
+    useEffect(() => {
+        expenseSummaryHandler();
+    }, [expenseItems]);
 
     useEffect(() => {
         remainingSummaryHandler();
@@ -124,6 +133,73 @@ export default function BoxItem() {
         setIncomeInput(obj);
     }
 
+    // expense
+
+    function expenseInputTitleHandler(e) {
+        const value = e.target.value;
+        const obj = { ...expenseInput, title: value };
+        console.log(obj)
+        setExpenseInput(obj);
+    }
+
+    function expenseInputAmountHandler(e) {
+        const value = e.target.value;
+
+        let obj;
+
+        // if value from amount is empty
+        if (value.trim().length <= 0) {
+            obj = { ...expenseInput, amount: '' }; // set amount to empty string
+        } else {
+            obj = { ...expenseInput, amount: Number(value) }; // set amount with convert to number
+        }
+
+        setExpenseInput(obj);
+    }
+
+    function expenseSummaryHandler() {
+        let total = 0;
+
+        for(let i = 0; i < expenseItems.length; i++) {
+            total += expenseItems[i].amount;
+        }
+
+        setExpense(total);
+    }
+
+    function expenseAppendHandler() {
+        if (typeof expenseInput.amount === 'string' || typeof expenseInput.amount <= 0) {
+            // flag error
+        } else {
+            // convert amount from any or string to number
+            const amountTemp = Number(expenseInput.amount);
+
+            // add new expense obj to append state
+            const appendTemps = updateState.appends;
+            appendTemps.push({ title: incomeInput.title, amount: amountTemp, type: 2 });
+
+            // push append state to update state
+            const updateStateTemp = { ...updateState, appends: appendTemps };
+            setUpdateState(updateStateTemp);
+
+            // push to expense item list
+            const expenseItem = {
+                id: -1,
+                title: expenseInput.title,
+                amount: amountTemp,
+                type: 2,
+                created_at: new Date()
+            };
+            const expenseItemTemps = [...expenseItems, expenseItem]
+            setExpenseItems(expenseItemTemps);
+
+            setExpenseInput({
+                title: '',
+                amount: ''
+            });
+        }
+    }
+
     return (
         <div>
             <div className='mt-3'>
@@ -206,13 +282,21 @@ export default function BoxItem() {
                             <tbody className=''>
                                 <tr>
                                     <td>
-                                        <input type="text" className={`form-control m-2 ${styles.tableInput}`} />
+                                        <input 
+                                            type="text" 
+                                            className={`form-control m-2 ${styles.tableInput}`}
+                                            value={expenseInput.title} 
+                                            onChange={expenseInputTitleHandler} />
                                     </td>
                                     <td>
-                                        <input type="number" className={`form-control m-2 ${styles.tableInput}`} />
+                                        <input 
+                                            type="number" 
+                                            className={`form-control m-2 ${styles.tableInput}`} 
+                                            value={expenseInput.amount} 
+                                            onChange={expenseInputAmountHandler} />
                                     </td>
                                     <td>
-                                        <button type='button' className='btn btn-success m-2'>add</button>
+                                        <button type='button' className='btn btn-success m-2' onClick={expenseAppendHandler}>add</button>
                                     </td>
                                 </tr>
                                 {expenseItems.map((item, index) => (
