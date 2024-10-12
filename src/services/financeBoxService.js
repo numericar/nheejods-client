@@ -22,6 +22,29 @@ async function getFinanceBoxs(start, end) {
     }
 }
 
+async function getFinanceBoxById(boxId) {
+    try {
+        if (typeof boxId != 'string' && typeof boxId != 'number') {
+            throw new Error('Finance box id is invalid type');
+        }
+
+        const response = await fetch(`${apiCondig.basePath}${apiCondig.routes.financeBoxs}/${boxId}`, {
+            method: 'get',
+            credentials: 'include'
+        });
+
+        if (response.status === 401) {
+            window.location.href = '/signin';
+            return;
+        }
+
+        return await response.json();
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 export default {
-    getFinanceBoxs
+    getFinanceBoxs,
+    getFinanceBoxById
 }
