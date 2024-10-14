@@ -7,25 +7,23 @@ export default function Navbar() {
     const { signInTick } = useContext(AppContext);
 
     useEffect(() => {
-        if (signInTick) {
-            const cookies = document.cookie.split(';');
+        const cookies = document.cookie.split(';');
 
-            let tempKey = '';
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i];
-                for (let j = 0; j < cookie.length; j++) {
-                    const c = cookie[j];
-                    if (c == '=') {
-                        break;
-                    } else {
-                        tempKey += c;
-                    }
+        let tempKey = '';
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i];
+            for (let j = 0; j < cookie.length; j++) {
+                const c = cookie[j];
+                if (c == '=') {
+                    break;
+                } else {
+                    tempKey += c;
                 }
             }
+        }
 
-            if (tempKey === targetKey) {
-                setIsAuthenticate(true);
-            }
+        if (tempKey === targetKey) {
+            setIsAuthenticate(true);
         }
     }, [signInTick]);
 
