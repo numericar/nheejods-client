@@ -44,7 +44,35 @@ async function getFinanceBoxById(boxId) {
     }
 }
 
+async function updateFinanceBoxById(boxId, appends, updates, removes) {
+    try {
+        if (typeof boxId != 'string' && typeof boxId != 'number') {
+            throw new Error('Finance box id is invalid type');
+        }
+
+        const response = await fetch(`${apiCondig.basePath}${apiCondig.routes.financeBoxs}/${boxId}/items`, {
+            method: 'PATCH',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                appends: appends,
+                updates: updates,
+                removes: removes
+            })
+        });
+
+        console.log(response);
+
+        return await response.json();
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+
 export default {
     getFinanceBoxs,
-    getFinanceBoxById
+    getFinanceBoxById,
+    updateFinanceBoxById
 }

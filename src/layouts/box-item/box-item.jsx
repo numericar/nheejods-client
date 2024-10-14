@@ -46,7 +46,7 @@ export default function BoxItem() {
     }, [income, expense]);
 
     useEffect(() => {
-        console.log(updateState);
+
     }, [updateState])
 
     async function getFinanceBoxById() {
@@ -57,15 +57,11 @@ export default function BoxItem() {
         setRemaining(response.data.remaining);
         setIncomeItems(response.data.incomeItems);
         setExpenseItems(response.data.expenseItems);
-
-        console.log(response);
     }
 
     function incomeAppendHandler() {
-        console.log(incomeInput);
+        if (typeof incomeInput.amount == 'string' || incomeInput.amount <= 0) {
 
-        if (typeof incomeInput.amount === 'string' || typeof incomeInput.amount <= 0) {
-            // flag error
         } else {
             // convert amount from any or string to number
             const amountTemp = Number(incomeInput.amount);
@@ -86,7 +82,8 @@ export default function BoxItem() {
                 type: 1,
                 created_at: new Date()
             };
-            const incomeItemTemps = [...incomeItems, incomeItem]
+
+            const incomeItemTemps = [...incomeItems, incomeItem];
             setIncomeItems(incomeItemTemps);
 
             setIncomeInput({
@@ -138,7 +135,7 @@ export default function BoxItem() {
     function expenseInputTitleHandler(e) {
         const value = e.target.value;
         const obj = { ...expenseInput, title: value };
-        console.log(obj)
+
         setExpenseInput(obj);
     }
 
@@ -168,7 +165,7 @@ export default function BoxItem() {
     }
 
     function expenseAppendHandler() {
-        if (typeof expenseInput.amount === 'string' || typeof expenseInput.amount <= 0) {
+        if (typeof expenseInput.amount === 'string' || expenseInput.amount <= 0) {
             // flag error
         } else {
             // convert amount from any or string to number
@@ -176,7 +173,7 @@ export default function BoxItem() {
 
             // add new expense obj to append state
             const appendTemps = updateState.appends;
-            appendTemps.push({ title: incomeInput.title, amount: amountTemp, type: 2 });
+            appendTemps.push({ title: expenseInput.title, amount: amountTemp, type: 2 });
 
             // push append state to update state
             const updateStateTemp = { ...updateState, appends: appendTemps };
@@ -200,13 +197,36 @@ export default function BoxItem() {
         }
     }
 
+    async function saveBtnHandler() {
+        const appends = updateState.appends;
+        const updates = updateState.updateds;
+        const removes = updateState.removes;
+
+        if (appends.length > 0 || updates.length > 0 || removes.length > 0) {
+            const response = await financeBoxService.updateFinanceBoxById(itemId, appends, updates, removes);
+
+            console.log(response)
+
+            if (response.isSuccess) {
+                const tempUpdateState = {
+                    appends: [],
+                    updateds: [],
+                    removes: []
+                }
+
+                setUpdateState(tempUpdateState);
+                getFinanceBoxById();
+            }
+        }
+    }
+
     return (
         <div>
             <div className='mt-3'>
                 <div>
                     <h2>{title}</h2>
                     <div className='d-flex justify-content-end'>
-                        <button className='btn btn-gold'>save</button>
+                        <button className='btn btn-gold' onClick={saveBtnHandler}>save</button>
                     </div>
                     <hr />
                 </div>
