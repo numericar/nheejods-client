@@ -1,12 +1,16 @@
 import styles from './sign-in.module.css';
 
 import authService from '../../services/authService.js';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AppContext from '../../AppContext.js';
 
 export default function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const { setSignInTick } = useContext(AppContext);
+
     const navigate = useNavigate();
 
     function emailInputHandler(e) {
@@ -23,6 +27,7 @@ export default function SignIn() {
         const response = await authService.login(email, password);
         console.log(response.isSuccess)
         if (response.isSuccess) {
+            setSignInTick(true);
             navigate('/');
         }
     }

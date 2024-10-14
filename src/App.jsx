@@ -8,21 +8,27 @@ import SignUp from './layouts/signup/sign-up'
 import Boxs from './layouts/boxs/boxs'
 import BoxItem from './layouts/box-item/box-item'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import AppContext from './AppContext'
+import { useState } from 'react'
 
 function App() {
+  const [signInTick, setSignInTick] = useState(false);
+
   return (
     <div className='app-container'>
-      <Navbar />
-      <div className='container'>
-        <BrowserRouter>
-          <Routes>
-            <Route path='' element={<Boxs />} />
-            <Route path='/signin' element={<SignIn />} />
-            <Route path='/signup' element={<SignUp />} />
-            <Route path='/item/:itemId' element={ <BoxItem /> } />
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <AppContext.Provider value={{signInTick, setSignInTick}}>
+        <Navbar />
+        <div className='container'>
+          <BrowserRouter>
+            <Routes>
+              <Route path='' element={<Boxs />} />
+              <Route path='/signin' element={<SignIn />} />
+              <Route path='/signup' element={<SignUp />} />
+              <Route path='/item/:itemId' element={<BoxItem />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </AppContext.Provider>
     </div>
   )
 }
