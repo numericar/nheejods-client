@@ -63,8 +63,26 @@ async function updateFinanceBoxById(boxId, appends, updates, removes) {
             })
         });
 
-        console.log(response);
+        return await response.json();
+    } catch (err) {
+        console.log(err.message);
+    }
+}
 
+async function create(year, month) {
+    try {
+        const response = await fetch(`${apiCondig.basePath}${apiCondig.routes.financeBoxs}`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                year: year,
+                month: Number(month)
+            })
+        });
+    
         return await response.json();
     } catch (err) {
         console.log(err.message);
@@ -74,5 +92,6 @@ async function updateFinanceBoxById(boxId, appends, updates, removes) {
 export default {
     getFinanceBoxs,
     getFinanceBoxById,
-    updateFinanceBoxById
+    updateFinanceBoxById,
+    create
 }

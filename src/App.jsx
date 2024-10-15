@@ -13,10 +13,11 @@ import { useState } from 'react'
 
 function App() {
   const [signInTick, setSignInTick] = useState(false);
+  const [fetchFinanceBoxTick, setFetchFinanceBoxTick] = useState(false);
 
   return (
     <div className='app-container'>
-      <AppContext.Provider value={{signInTick, setSignInTick}}>
+      <AppContext.Provider value={{ signInTickState: [signInTick, setSignInTick], fetchFinanceBoxState: [fetchFinanceBoxTick, setFetchFinanceBoxTick] }}>
         <Navbar />
         <div className='container'>
           <BrowserRouter>

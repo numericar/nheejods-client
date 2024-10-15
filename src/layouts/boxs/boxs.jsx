@@ -1,17 +1,25 @@
 import './boxs.module.css';
 import ShortBoxItem from './components/short-box-item';
 import financeBoxService from '../../services/financeBoxService';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import AppContext from '../../AppContext';
 
 export default function Boxs() {
     const years = [2024, 2025, 2026, 2027];
     const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+    const { fetchFinanceBoxState } = useContext(AppContext);
 
     const [financeBoxs, setFinanceBoxs] = useState([]);
     const [startYearSelected, setStartYearSelected] = useState(years[0]);
     const [startMonthSelected, setStartMonthSelected] = useState(months[0]);
     const [endYearSeleted, setEndYearSelected] = useState(years[0]);
     const [endMonthSelected, setEndMonthSelected] = useState(months[0]);
+    const [fetchFinanceBoxTick, setFetchFinanceBoxTick] = fetchFinanceBoxState;
+    
+
+    useEffect(() => {
+        getFinanceBoxs();
+    }, [fetchFinanceBoxTick])
 
     useEffect(() => {
         getFinanceBoxs();

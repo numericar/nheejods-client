@@ -6,10 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import AppContext from '../../AppContext.js';
 
 export default function SignIn() {
+    const { signInTickState } = useContext(AppContext);
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const { setSignInTick } = useContext(AppContext);
+    const [signInTick, setSignInTick] = signInTickState;
 
     const navigate = useNavigate();
 

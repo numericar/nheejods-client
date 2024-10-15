@@ -1,0 +1,9 @@
+.modalFinanceBoxCreateHeader, .modalFinanceBoxCreateFooter {
+    background-color: #343a40;
+    color: white;
+}
+
+.modalFinanceBoxCreateBody {
+    background-color: #5c6064;
+    color: white;
+}
