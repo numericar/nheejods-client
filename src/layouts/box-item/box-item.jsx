@@ -46,7 +46,7 @@ export default function BoxItem() {
     }, [income, expense]);
 
     useEffect(() => {
-
+        console.log(updateState);
     }, [updateState])
 
     async function getFinanceBoxById() {
@@ -197,6 +197,20 @@ export default function BoxItem() {
         }
     }
 
+    function removeItemBtnHandler(item, type) {
+        const removes = [...updateState.removes, item];
+        const updateStateTemp = { ...updateState, removes: removes };
+        setUpdateState(updateStateTemp);
+
+        if (type == 'income') {
+            const incomeTemps = incomeItems.filter(x => x.id != item.id);
+            setIncomeItems(incomeTemps);
+        } else if (type == 'expense') {
+            const expenseTemps = expenseItems.filter(x => x.id != item.id);
+            setExpenseItems(expenseTemps);
+        }
+    }
+
     async function saveBtnHandler() {
         const appends = updateState.appends;
         const updates = updateState.updateds;
@@ -281,7 +295,9 @@ export default function BoxItem() {
                                     <tr key={index}>
                                         <td>{item.title}</td>
                                         <td>{item.amount}</td>
-                                        <td></td>
+                                        <td>
+                                        <button className='btn btn-danger' onClick={() => removeItemBtnHandler(item, 'income')}>remove</button>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -323,7 +339,9 @@ export default function BoxItem() {
                                     <tr key={index}>
                                         <td>{item.title}</td>
                                         <td>{item.amount}</td>
-                                        <td></td>
+                                        <td>
+                                            <button className='btn btn-danger' onClick={() => removeItemBtnHandler(item, 'expense')}>remove</button>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
